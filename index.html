@@ -1,213 +1,324 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <link href="http://cdn.bootcss.com/select2/4.0.3/css/select2.css" rel="stylesheet">
-    <script src="http://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
-
-        <!-- script -->
-    <script src="http://cdn.bootcss.com/video.js/6.0.0-RC.8/video.js"></script>
-    <script>
-        videojs.options.flash.swf = "http://cdn.bootcss.com/video.js/6.0.0/video-js.swf";
-    </script>
-    <link href="http://cdn.bootcss.com/video.js/6.0.0-RC.8/video-js.css" rel="stylesheet">
-    
-    <link href="video-user.css" rel="stylesheet">
-
-    <script type="text/javascript">
-    $(document).ready(function() {
-      $("select").select2();
-    });
-    </script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>一个充满无限可能的地方</title>
+	<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="http://cdn.bootcss.com/vue/2.3.0/vue.js"></script>
+  <script src="http://cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
+  <link href="http://cdn.bootcss.com/select2/4.0.3/css/select2.css" rel="stylesheet">
+	<script src="http://cdn.bootcss.com/select2/4.0.3/js/select2.full.js"></script> <script src="http://cdn.bootcss.com/video.js/6.0.0-RC.8/video.js"></script>
+  <link href="http://cdn.bootcss.com/video.js/6.0.0-RC.8/video-js.css" rel="stylesheet">
+  <style type="text/css">
+		.select2-user {height: 40px !important;}
+		.position-col {height: 340px;}
+		.header {
+			height: 70px;
+		}
+		.refresh-btn{
+			font-size: 13px;
+			padding: 4px 7px !important;
+			margin: 3px !important;
+		}
+		.bilibili{
+			border: 1px solid #ddd;
+			border-radius: 6px;
+			margin: 20px 10px 10px 10px;
+			padding: 3px;
+		}	
+		.my-border{
+			border: 1px solid #ddd;
+			border-radius: 6px;
+		}
+		.part-select{
+			height: 30px;
+			text-align: center;
+			margin: 10px;
+		}
+		.readmore-btn{
+			font-size: 12px;
+			padding: 4px 4px !important;
+			margin: 10px !important;
+		}
+		.font-head {
+			text-align: center;
+		}
+		body{
+			background-image: url(http://opxuqebqb.bkt.clouddn.com/background.jpg);
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center;
+			background-attachment:fixed;
+			display: block;
+			position: absolute;
+			min-height: 100%;
+			width: 100%;
+		}
+	</style>
 </head>
 <body>
-
-<header class="site-header">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <h1>
-          <span></span>
-          dream on the way
-        </h1>
-      </div>
-      <div class="col-sm-12">
-        <select id="video" class="form-control ">
-        </select>
-      </div>
-      <div class="col-sm-12">
-        <div id="hider" class="col-sm-12">
-          <span id="hider-icon" class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+	<header class="header">
+    <div class="container">
+      <div class="row" >
+        <div class='col-sm-12'>
+          <h3>Enjoy it</h3>
         </div>
       </div>
     </div>
-  </div>
+  </header>
+	<div id='app'>
+	  <div class="navbar navbar-default ">
+	    <div class="container">
+	      <div class="row">
+	        <nav class="nav navbar-nav">
+	          <li v-for="item in items" style="font-size: 15px">
+	            <a :href="item.href"  v-on:click="show(item.event)" data-toggle="tooltip" :title="item.title"><span class="glyphicon" :class=" item.class "></span>{{ item.text }}</a>
+	          </li>
+	        </nav>
+	      </div>
+	    </div>
+	  </div> 
+		
+		<section id="content">
+			<div class='container'>
+	      <div class='row-fluid'>
+	      	<div v-if="sec == 'font'">
+	      		<div class="col-md-6 my-border"  style="min-height: 500px; background-color: white">
+	      				<h3 class='font-head' style="color: #055db5">逼乎</h3>
+   				  		<ul class="nav nav-tabs" role="tablist" id="zhihutab">
+							    <li class="active"><a href="#today"  role="tab" data-toggle="tab">今日热门</a></li>
+							    <li><a href="#month" role="tab" data-toggle="tab" v-on:click.once="zhihugetmonth">本月热门</a></li>
+							    <li><a href="#reco"  role="tab" data-toggle="tab" v-on:click.once="zhihugetreco">编辑推荐</a></li>
+							    <li><a href="#daily" role="tab" data-toggle="tab" v-on:click.once="zhihugetdaily">逼乎日报</a></li>
+							  </ul>
+
+									<div class="tab-content">
+								    <div role="tabpanel" class="tab-pane active" id="today">
+							    		<div class="col-sm-12">
+								    		<button type="button" class="btn btn-default pull-right refresh-btn" v-on:click="zhihugetday">
+								    		<span class="glyphicon glyphicon-refresh"> 换一批</span>
+								    		</button>
+							    		</div>
+											<div class="col-sm-12" v-for="content in zhihuday.content">
+							        	<zhihu :content='content' v-on:remove='remove($index,zhihuday.content)' v-on:getcontent='zhihugetcontent(content.aid)'></zhihu>
+								     	</div>
+									  </div>
+								    <div role="tabpanel" class="tab-pane" id="daily">
+							    		<div class="col-sm-12">
+								    		<button type="button" class="btn btn-default pull-right refresh-btn" v-on:click="zhihugetdaily">
+								    		<span class="glyphicon glyphicon-refresh"> 换一批</span>
+								    		</button>
+							    		</div>
+											<div class="col-sm-6" v-for="content in zhihudaily.content">
+							        	<zhihudaily :content='content' v-on:remove='remove($index,zhihudaily.content)'></zhihudaily>
+								      </div>
+								    </div>
+								    <div role="tabpanel" class="tab-pane" id="month">
+								    	<div class="col-sm-12">
+								    		<button type="button" class="btn btn-default pull-right refresh-btn" v-on:click="zhihugetmonth">
+								    		<span class="glyphicon glyphicon-refresh"> 换一批</span>
+								    		</button>
+								    	</div>
+											<div class="col-sm-12" v-for="content in zhihumonth.content">
+						        		<zhihu :content='content' v-on:remove='remove($index,zhihumonth.content)' v-on:getcontent='zhihugetcontent(content.aid)'></zhihu>
+							      	</div>
+								    </div>
+								    <div role="tabpanel" class="tab-pane" id="reco">
+								    	<div class="col-sm-12">
+								    		<button type="button" class="btn btn-default pull-right refresh-btn" v-on:click="zhihugetreco">
+								    		<span class="glyphicon glyphicon-refresh"> 换一批</span>
+								    		</button>
+								    	</div>
+											<div class="col-sm-12" v-for="content in zhihureco.content">
+						       			 <zhihu :content='content' v-on:remove='remove($index,zhihureco.content)' v-on:getcontent='zhihugetcontent(content.aid)'></zhihu>
+							      	</div>
+								    </div>
+								  </div>
+					<div class="modal fade bs-example-modal-lg" id="zhihucontent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h2 class="modal-title" id="myModalLabel">{{detailcontent.title}}</h2>
+					        <h4 class='pull-right'>author: {{detailcontent.author}}</h4>
+					      </div>
+					      <div class="modal-body"  v-html='detailcontent.content'>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 
 
-</header>
 
 
-<section id="play-section">
-  <div class="container">
-    <div class='row'>
-      <div class="col-md-2 center-block">
-        <div class="panel panel-default panel-primary">
-          <div class="panel-heading">Panel heading without title</div>
-          <div class="panel-body">
-            Panel content
-          </div>
-        </div>
-        <div class="btn-group-vertical" role="group" aria-label="...">
-          <button type="button" class="btn btn-default">Left</button>
-          <button type="button" class="btn btn-default">Middle</button>
-          <button type="button" class="btn btn-default">Right</button>
-        </div>
+	      		</div>
+	      		<div class="col-md-6">
+
+	      			<div class="col-md-12 my-border" style="min-height: 300px; background-color: white">
+	      					<h4 class='font-head' style='color:#ffafc9;'> ( ゜- ゜)つロ 干杯</h4>
+	      					<ul class="nav nav-tabs" role="tablist" id="bilibilitab">
+							    <li class="active"><a href="#bilitoday"  role="tab" data-toggle="tab" style='color:#ffafc9'>今日更新</a></li>
+							    <li><a href="#biliweek" role="tab" data-toggle="tab" style='color:#ffafc9' v-on:click.once="bigetweek">本周更新</a></li>
+							  	</ul>
+							  	<div class="tab-content">
+							  	<div role="tabpanel" class="tab-pane active" id="bilitoday">
+											<div class="row" style="margin-right: 0px;" v-for="data in bilibiliday">
+							        	<bilibili :data='data' v-on:remove='remove($index,bilibiliday)'></bilibili>
+								      </div>
+								  </div>
+								  <div role="tabpanel" class="tab-pane" id="biliweek">
+											<div class="row" style="margin-right: 0px;" v-for="data in bilibiliweek">
+							        	<bilibili :data='data'  v-on:remove='remove($index,bilibiliweek)'></bilibili>
+								      </div>
+								  </div>
+								  </div>
+	      			</div>
+							
+							
+
+	      		</div>
+	      	</div>
+		      <div v-if="sec == 'blog'">
+									<div class="col-sm-4" v-for="blog in blogs">
+				            <div class="thumbnail position-col">
+				              <img :src="blog.img" alt="">
+				              <div class='caption'>
+				                <h3>{{blog.title}}</h3>
+				                <p>{{blog.abs}}</p>
+				                <p> {{blog.date}}</p>
+				              </div>
+				            </div>
+				     </div>
+								</div>
+		      <div v-if="sec == 'pic'">
+						<div class="col-sm-4" v-for="pic in pics">
+	            <div class="thumbnail position-col">
+	              <img :src="pic.img" alt="">
+	              <div class='caption'>
+	                <h3>{{pic.title}}</h3>
+	                <p>{{pic.abs}}</p>
+	                <p> {{pic.geo}}</p>
+	              </div>
+	            </div>
+	          </div>
+					</div>
+					<div v-show="sec == 'video'">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-10" style="min-height:80px;font-size: 20px; text-align:center;">
+									<img src="http://opxuqebqb.bkt.clouddn.com/yk-logo.png" alt="">
+									<span class="glyphicon glyphicon-search"></span>
+									<select2video v-model='vid' class="col-sm-7" style="min-width:400px">
+									<select2video>
+								</div>
+								<div class="col-sm-3">
+									<div class="row">
+									
+									<div  class="col-md-12 my-border" style="min-height: 300px; background-color: white;color:#ff4343;">
+										<h4 class='font-head' style='color:#ff4343;'>选一个清晰度吧O(∩_∩)O~</h4>
+										<ul class="nav nav-tabs" role="tablist" id="videoplaytab">
+										<li v-for="(urls,i) in vdata.video_urls"  v-bind:class="{ active: videotype == i+1 }" >
+										<a role="tab" style='color:#ff4343' v-on:click='vtypeselect(i+1)'>{{urls.text}}</a>
+										</li>
+										</ul>
+										<div class="row" v-for="(urls,i) in vdata.video_urls" v-show="videotype == i+1">
+											<div class="part-select my-border" v-for="(url,index) in urls.urls">
+											<span class="col-md-4" >part {{index+1}}</span>
+											<a :href='url' class="col-md-3">下载</a>
+											<button class="btn btn-default col-md-5" style="padding:3px 2px" v-on:click='playpart(urls.urls,index)'><span class="glyphicon glyphicon-play"></span>播放</button>
+											</div>
+										</div>
+									</div>
+
+									</div>
+
+									<div class="row" style="margin-top:30px">
+										<div class="alert alert-warning alert-dismissible" role="alert">
+									  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									  <strong>提示~~</strong> 某些视频在超清清晰度下不完整
+									</div>
+
+
+									</div>
+
+								</div>
+								<div class="col-sm-8">
+									<player :playurl='playurl' :ind='vindex' :img='vimg'></player>
+								</div>
+							</div>
+						</div>
+					</div>
+		      <div v-if="sec == 'work'">
+		      	<div class="container">
+		      	<div class="row" style="min-height: 40px;display:block !important">
+
+		      	<div class="col-sm-2">
+		      		<span>来源</span>
+		      		<select2-simple :options="siteoptions" v-model="positionsite" style="min-width: 100px">
+					    </select2-simple>
+		      	</div>
+
+	      		<div class="col-sm-3" v-show="positionsite == 'liepin'">
+		      		<span>城市</span>
+					    <select2-simple :options="liepincityoptions" v-model="city" style="min-width: 130px">
+					      <option value="0">全国</option>
+					    </select2-simple>
+	      		</div>
+
+		      	<div class="col-sm-3" v-show="positionsite == 'lagou'">
+		      		<span>城市</span>
+					    <select2-simple :options="lagoucityoptions" v-model="city" style="min-width: 130px">
+					      <option value="0">全国</option>
+					    </select2-simple>
+	      		</div>
+						
+
+	      		<div class="col-sm-3">
+	      			<span>分类:</span>
+					    <select2-simple :options="catagories" v-model="catagory" style="min-width: 150px">
+					      <option value="0">all</option>
+					    </select2-simple>
+	      		</div>
+		      	<div class="col-sm-2">
+		      		<button v-on:click="randomwork" class="btn btn-default">
+		      			<span class="glyphicon glyphicon-refresh"> 换一批</span>
+		      		</button>
+		      	</div>
+		      	</div>	
+
+						</div>	
+						<div class="col-sm-4" v-for="position in positions">
+        <my-position :position='position' v-on:remove='remove($index,positions)'></my-position>
       </div>
-      <div class="col-md-8 center-block">
-        <div id='play-setting' class="col-md-8"></div>
-        <video id="my-video" class="video-js vjs-big-play-centered " controls preload="auto" width="640" height="480"  data-setup="{}"></video>
-      </div>
-    </div>
+					</div>											
+	      </div>
+	    </div>          
+		</section>
+	</div>
 
-  </div>
-</section>
 
-<section id='download'>
-  <div class="row">
-    <label class="col-lg-1">link:</label>
-    <div class="btn-toolbar col-lg-8" role="toolbar">
-      <button class="btn-group" role="group">1</button>
-      <button class="btn-group" role="group">2</button>
-      <button class="btn-group" role="group">3</button>
-    </div>
-  </div>
-</section>
 
-<script type="text/javascript">
-  function play_video_set(urls,ind,img)
-      {
-          var myPlayer = videojs('my-video');
-          var set_len = urls.length;
-          var curr = ind;
-          myPlayer.pause();
-          myPlayer.poster(img);
-          myPlayer.src({type: "video/mp4", src: urls[curr]});
-          myPlayer.ready(function(){});
-          myPlayer.on('ended', function()
-            {
-              curr++;
-              if (curr<set_len){
-                myPlayer.src({type: "video/mp4", src: urls[curr]});
-                myPlayer.play();
-              }
-              else{
-                myPlayer.src({type: "video/mp4", src: urls[0]});
-              }
-            });
-        };
+<script type="text/x-template" id="select2-template">
+  <select>
+    <slot></slot>
+  </select>
 </script>
-
-
-  <script type="text/javascript">
-  var aja_count = 0
-  function resultFormatResult(data) { 
-      if (data.loading) return data.title;
-      return "<div class='select2-result-respository clearfix'>" + data.title + "</div>";
-  }
-
-  function resultFormatSelection(data) {
-      console.log(aja_count);
-      aja_count = aja_count+1
-      $.ajax({
-        url:"http://127.0.0.1:8000/video/parse_website/",
-        data:{'url':data.vid},
-        timeout:1000,
-        success:function(result)
-        {
-              var v =  JSON.parse(result);
-              $("#download").empty();
-              if (v.video_urls)
-              {
-
-                for (var v_i in v.video_urls){
-                  var row = $("<div></div>");
-                  row.addClass('row');
-
-                  var play_label = $("<label></label>");
-                  play_label.text(v.video_urls[v_i]['type']);
-                  play_label.addClass("col-lg-1");
-
-                  var play_btns = $("<div></div>");
-                  play_btns.addClass("btn-toolbar col-lg-8");
-                  for (var p_i in v.video_urls[v_i]['urls']){
-                    var play_part = $("<button></button>");
-                    play_part.text(p_i)
-                    play_part.addClass('group')
-                    play_part.attr('v',v_i);
-                    play_part.attr('p',p_i);
-                    play_part.click(function(){
-                      var video_ = $(this).attr('v');
-                      var part_ = $(this).attr('p');
-                      play_video_set(v.video_urls[video_]['urls'],part_,data.img);
-                    });
-                    play_btns.append(play_part);
-                  };
-
-                  row.append(play_label);
-                  row.append(play_btns);
-                  $("#download").append(row);
-                };
-                play_video_set(v.video_urls[0]['urls'],0,data.img)
-              };
-        },
-      });
-      return data.title;
-  }
-
-  $(document).ready(function() {
-    $('#video').select2({
-      placeholder: "给你好看",
-      ajax:{
-        url:'http://127.0.0.1:8000/video/search',
-        delay:800,
-        dataType: 'json',
-        data:function(params){ 
-          return{
-            title:params.term,
-            page: params.page,
-          };
-        },
-        processResults: function (data, params) {
-          // parse the results into the format expected by Select2
-          // since we are using custom formatting functions we do not need to
-          // alter the remote JSON data, except to indicate that infinite
-          // scrolling can be used
-          params.page = params.page || 1;
-
-          return {
-            results: data.items,
-            pagination: {
-              more: (params.page * 30) < data.total_count
-            }
-          };
-        },
-        cache:true
-      },
-      escapeMarkup: function (markup) { return markup; }, 
-      minimumInputLength: 1,
-      templateResult:resultFormatResult,
-      templateSelection:resultFormatSelection,
-    });
-  });
-  </script>
-
-
+<script type="text/x-template" id="video-template">
+  <video id='my-video' class="video-js vjs-big-play-centered " controls preload="auto" width="800" height="640"  data-setup="{}">
+    <slot></slot>
+  </video>
+</script>
+<script src="http://opxuqebqb.bkt.clouddn.com/app.js"></script> 
+<script>
+ 	$(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script> 
 
 
 </body>
