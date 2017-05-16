@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="referrer" content="never">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>一个充满无限可能的地方</title>
 	<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -49,8 +50,12 @@
 			text-align: center;
 		}
 		body{
-			background-image: url(http://opxuqebqb.bkt.clouddn.com/background.jpg);
-			background-repeat: no-repeat;
+			background: -webkit-linear-gradient(45deg,#292953 0,#57180e 100%);
+			 background: -o-linear-gradient(45deg,#292953 0,#57180e 100%); 
+			background: -moz-linear-gradient(45deg,#292953 0,#57180e 100%);
+			background: linear-gradient(45deg,#292953 0,#57180e 100%); 
+			
+			background-repeat: repeat;
 			background-size: cover;
 			background-position: center;
 			background-attachment:fixed;
@@ -64,9 +69,9 @@
 <body>
 	<header class="header">
     <div class="container">
-      <div class="row" >
+      <div class="row" style="text-align: center;color:white;">
         <div class='col-sm-12'>
-          <h3>Enjoy it</h3>
+          <h2>不要忘记，你是怎么一步步走到今天的。</h2>
         </div>
       </div>
     </div>
@@ -88,7 +93,8 @@
 			<div class='container'>
 	      <div class='row-fluid'>
 	      	<div v-if="sec == 'font'">
-	      		<div class="col-md-6 my-border"  style="min-height: 500px; background-color: white">
+	      		<div class='container col-lg-6 col-md-6 col-sm-12' style="margin-bottom: 20px">
+	      		<div class="col-md-12 my-border"  style="min-height: 500px; background-color: white">
 	      				<h3 class='font-head' style="color: #055db5">逼乎</h3>
    				  		<ul class="nav nav-tabs" role="tablist" id="zhihutab">
 							    <li class="active"><a href="#today"  role="tab" data-toggle="tab">今日热门</a></li>
@@ -155,15 +161,14 @@
 					    </div>
 					  </div>
 					</div>
-
-
+					</div>
 
 
 	      		</div>
-	      		<div class="col-md-6">
 
-	      			<div class="col-md-12 my-border" style="min-height: 300px; background-color: white">
-	      					<h4 class='font-head' style='color:#ffafc9;'> ( ゜- ゜)つロ 干杯</h4>
+							<div class='container col-lg-6 col-md-6 col-sm-12' style="margin-bottom: 20px">
+	      			<div class="col-md-12 my-border" style="min-height: 500px; background-color: white;">
+	      					<h3 class='font-head' style='color:#ffafc9;'> ( ゜- ゜)つロ 干杯</h3>
 	      					<ul class="nav nav-tabs" role="tablist" id="bilibilitab">
 							    <li class="active"><a href="#bilitoday"  role="tab" data-toggle="tab" style='color:#ffafc9'>今日更新</a></li>
 							    <li><a href="#biliweek" role="tab" data-toggle="tab" style='color:#ffafc9' v-on:click.once="bigetweek">本周更新</a></li>
@@ -181,10 +186,8 @@
 								  </div>
 								  </div>
 	      			</div>
-							
-							
+							</div>
 
-	      		</div>
 	      	</div>
 		      <div v-if="sec == 'blog'">
 									<div class="col-sm-4" v-for="blog in blogs">
@@ -213,13 +216,13 @@
 					<div v-show="sec == 'video'">
 						<div class="container">
 							<div class="row">
-								<div class="col-sm-10" style="min-height:80px;font-size: 20px; text-align:center;">
+								<div class="col-md-10 col-xs-12" style="min-height:80px;font-size: 20px; text-align:center;color:white">
 									<img src="http://opxuqebqb.bkt.clouddn.com/yk-logo.png" alt="">
 									<span class="glyphicon glyphicon-search"></span>
 									<select2video v-model='vid' class="col-sm-7" style="min-width:400px">
 									<select2video>
 								</div>
-								<div class="col-sm-3">
+								<div class="col-md-3 col-xs-12">
 									<div class="row">
 									
 									<div  class="col-md-12 my-border" style="min-height: 300px; background-color: white;color:#ff4343;">
@@ -250,7 +253,7 @@
 									</div>
 
 								</div>
-								<div class="col-sm-8">
+								<div class="col-md-8 col-xs-12">
 									<player :playurl='playurl' :ind='vindex' :img='vimg'></player>
 								</div>
 							</div>
@@ -258,22 +261,22 @@
 					</div>
 		      <div v-if="sec == 'work'">
 		      	<div class="container">
-		      	<div class="row" style="min-height: 40px;display:block !important">
+		      	<div class="row" style="min-height: 40px;display:block !important;color:white;font-size: 18px">
 
-		      	<div class="col-sm-2">
+		      	<div class="col-md-2 col-sm-3">
 		      		<span>来源</span>
 		      		<select2-simple :options="siteoptions" v-model="positionsite" style="min-width: 100px">
 					    </select2-simple>
 		      	</div>
 
-	      		<div class="col-sm-3" v-show="positionsite == 'liepin'">
+	      		<div class="col-md-3" v-show="positionsite == 'liepin'">
 		      		<span>城市</span>
 					    <select2-simple :options="liepincityoptions" v-model="city" style="min-width: 130px">
 					      <option value="0">全国</option>
 					    </select2-simple>
 	      		</div>
 
-		      	<div class="col-sm-3" v-show="positionsite == 'lagou'">
+		      	<div class="col-md-3" v-show="positionsite == 'lagou'">
 		      		<span>城市</span>
 					    <select2-simple :options="lagoucityoptions" v-model="city" style="min-width: 130px">
 					      <option value="0">全国</option>
@@ -281,7 +284,7 @@
 	      		</div>
 						
 
-	      		<div class="col-sm-3">
+	      		<div class="col-md-3">
 	      			<span>分类:</span>
 					    <select2-simple :options="catagories" v-model="catagory" style="min-width: 150px">
 					      <option value="0">all</option>
@@ -295,7 +298,7 @@
 		      	</div>	
 
 						</div>	
-						<div class="col-sm-4" v-for="position in positions">
+						<div class="col-md-4 col-sm-6" v-for="position in positions">
         <my-position :position='position' v-on:remove='remove($index,positions)'></my-position>
       </div>
 					</div>											
